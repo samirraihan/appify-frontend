@@ -2,14 +2,15 @@ FROM node:18
 
 WORKDIR /app
 
+# Copy only package files first (for cache optimization)
 COPY package*.json ./
 
 RUN npm install
 
+# Now copy rest (excluding node_modules via .dockerignore)
 COPY . .
 
-COPY .env .
-
+# Build app
 RUN npm run build
 
 EXPOSE 3000
