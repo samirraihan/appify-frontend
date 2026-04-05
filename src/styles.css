@@ -1,0 +1,7 @@
+@import url('/assets/css/bootstrap.min.css');
+@import url('/assets/css/common.css');
+@import url('/assets/css/main.css');
+@import url('/assets/css/responsive.css');
+
+/* minimal overrides for react app layout */
+body { background: #fff; font-family: 'Poppins', sans-serif; }
