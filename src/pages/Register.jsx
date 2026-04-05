@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
 export default function Register() {
@@ -71,7 +71,7 @@ export default function Register() {
                 </div>
               </form>
               <div className="_social_registration_bottom_txt">
-                <p className="_social_registration_bottom_txt_para">Already have an account? <a href="/login">Login</a></p>
+                <p className="_social_registration_bottom_txt_para">Already have an account? <Link to="/login">Login</Link></p>
               </div>
             </div>
           </div>

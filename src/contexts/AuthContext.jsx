@@ -6,11 +6,23 @@ const AuthContext = createContext()
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(() => localStorage.getItem('token'))
+  const [loading, setLoading] = useState(Boolean(token))
 
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token)
-      // Optionally fetch current user
+      ;(async () => {
+        setLoading(true)
+        try {
+          const resp = await api.get('/me')
+          setUser(resp.data || resp.data?.data || null)
+        } catch (e) {
+          setToken(null)
+          setUser(null)
+        } finally {
+          setLoading(false)
+        }
+      })()
     } else {
       localStorage.removeItem('token')
     }
@@ -47,7 +59,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   )
